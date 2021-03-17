@@ -12,7 +12,7 @@
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest",
     "test-all": "yarn lint && yarn type-check && yarn test",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6666",
     "build-storybook": "build-storybook"
   },
   "husky": {
@@ -30,7 +30,12 @@
   "dependencies": {
     "next": "latest",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "swr": "^0.5.3",
+    "firebase": "^8.3.0",
+    "firebase-admin": "^9.5.0",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.4.0"
   },
   "devDependencies": {
     "@testing-library/react": "^11.2.5",
