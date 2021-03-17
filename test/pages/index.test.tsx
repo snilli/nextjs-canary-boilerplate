@@ -10,6 +10,9 @@ describe('Home page', () => {
 
   it('clicking button triggers alert', () => {
     const { getByText } = render(<Home />, {})
+    // eslint-disable-next-line no-console
+    console.log(getByText('Test Button'))
+
     window.alert = jest.fn()
     fireEvent.click(getByText('Test Button'))
     expect(window.alert).toHaveBeenCalledWith('With typescript and Jest')
