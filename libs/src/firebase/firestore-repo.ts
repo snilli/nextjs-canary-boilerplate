@@ -1,32 +1,33 @@
 import 'reflect-metadata'
 import {injectable} from 'tsyringe'
 import {FirebaseApp} from './firebase'
-import {FirestoreRepoOptions} from './interfaces/firestore-repo.interface'
+import {FirestoreRepoCreateFactory, FirestoreRepoOptions} from './interfaces/firestore-repo.interface'
 import firebase from 'firebase'
-import {ModelPayload} from '../ddd/interfaces/model.interface'
 import {Model} from '../ddd/model'
 
 @injectable()
-export class FirestoreRepo<T extends ModelPayload> {
-  // protected createFactory: FirestoreRepoCreateFactory<T>
+export class FirestoreRepo<T extends Model> {
+  protected createFactory: FirestoreRepoCreateFactory<T>
   protected collectionName: string
 
   constructor(
-      option: FirestoreRepoOptions,
+      option: FirestoreRepoOptions<T>,
       private firebase: FirebaseApp,
   ) {
-    // this.createFactory = option.createFactory
+    this.createFactory = option.createFactory
     this.collectionName = option.collectionName
   }
 
-  async setDoc(document: Model<T>): Promise<void> {
+  async setDoc(document: T): Promise<void> {
     const id = document.getId()
     const collection = await this.getCollectionRef()
 
-    await collection.doc(id).set(document.toJSON())
+    const data = document.toJSON() as unknown as T
+
+    await collection.doc(id).set(data)
   }
 
-  async updateDoc(document: Model<T>): Promise<void> {
+  async updateDoc(document: T): Promise<void> {
     const id = document.getId()
     const docRef = await this.getDocRef(id)
 
@@ -47,11 +48,11 @@ export class FirestoreRepo<T extends ModelPayload> {
     await docRef.delete()
   }
 
-  getCollectionRef(): firebase.firestore.CollectionReference<T> {
+  getCollectionRef(): firebase.firestore.CollectionReference<any> {
     return this
         .firebase
         .firestore()
-        .collection(this.collectionName) as firebase.firestore.CollectionReference<T>
+        .collection(this.collectionName) as firebase.firestore.CollectionReference<any>
   }
 
   async getDocRef(id: string): Promise<firebase.firestore.DocumentReference<T> | undefined> {
@@ -68,11 +69,13 @@ export class FirestoreRepo<T extends ModelPayload> {
     const collection = await this.getCollectionRef()
     const doc = collection.doc(id)
     const docSnap = await doc.get()
+    // await this.disconnect()
+
     if (!docSnap.exists) {
       return
     }
 
-    return docSnap.data()
+    return this.createFactory(docSnap.data())
   }
 
   async getCollectionData(): Promise<Map<string, T> | undefined> {
@@ -83,10 +86,15 @@ export class FirestoreRepo<T extends ModelPayload> {
 
     const dataMap: Map<string, T> = new Map<string, T>()
     const collection = await collectionRef.get()
+
     collection.forEach(doc => {
-      dataMap.set(doc.id, doc.data())
+      dataMap.set(doc.id, this.createFactory(doc.data()))
     })
 
     return dataMap
+  }
+
+  async disconnect(): Promise<void> {
+    await this.firebase.firestore().disableNetwork()
   }
 }

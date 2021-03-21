@@ -7,8 +7,7 @@ import {Model} from '../../ddd/model'
 
 export type FirestoreRepoCreateFactory<T extends Model> = (payload: any) => T
 
-export interface FirestoreRepoOptions {
-  // export interface FirestoreRepoOptions<T extends Model> {
+export interface FirestoreRepoOptions<T extends Model> {
   collectionName: string
-  // createFactory: FirestoreRepoCreateFactory<T>
+  createFactory: FirestoreRepoCreateFactory<T>
 }

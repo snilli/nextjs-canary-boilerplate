@@ -8,7 +8,7 @@ describe('Home page', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
-  it('clicking button triggers alert', () => {
+  it('clicking button triggers alert', (done) => {
     const {getByText} = render(<Home />, {})
     // eslint-disable-next-line no-console
     console.log(getByText('Test Button'))
@@ -16,5 +16,6 @@ describe('Home page', () => {
     window.alert = jest.fn()
     fireEvent.click(getByText('Test Button'))
     expect(window.alert).toHaveBeenCalledWith('With typescript and Jest')
+    done()
   })
 })

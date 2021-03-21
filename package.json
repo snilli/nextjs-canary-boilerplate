@@ -12,7 +12,7 @@
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "test": "jest -i",
     "test:clear": "jest --clearCache",
-    "test-all": "yarn lint && yarn type-check && yarn src/test",
+    "test-all": "yarn lint && yarn type-check && yarn src/tests",
     "storybook": "start-storybook -p 6666",
     "build-storybook": "build-storybook"
   },
@@ -36,7 +36,8 @@
     "react-dom": "^17.0.1",
     "reflect-metadata": "^0.1.13",
     "swr": "^0.5.3",
-    "tsyringe": "^4.4.0"
+    "tsyringe": "^4.4.0",
+    "nanoid": "^3.1.22"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.13.5",
@@ -61,13 +62,18 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "react-docgen-typescript": "^1.21.0",
+    "jest-watch-typeahead": "^0.6.1",
     "ts-jest": "^26.5.4",
     "typescript": "^4.2.3"
   },
   "jest": {
+    "roots": [
+      "src",
+      "libs"
+    ],
     "projects": [
-      "src/test/jest.config.js",
-      "libs/test/jest.config.js"
+      "src/jest.config.js",
+      "libs/tests/jest.config.js"
     ]
   }
 }
