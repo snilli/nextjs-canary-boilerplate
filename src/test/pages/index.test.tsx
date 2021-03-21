@@ -1,15 +1,15 @@
 import React from 'react'
-import { fireEvent, render } from '../testUtils'
-import { Home } from '../../src/pages'
+import {fireEvent, render} from '../testUtils'
+import {Home} from '../../pages'
 
 describe('Home page', () => {
   it('matches snapshot', () => {
-    const { asFragment } = render(<Home />, {})
+    const {asFragment} = render(<Home />, {})
     expect(asFragment()).toMatchSnapshot()
   })
 
   it('clicking button triggers alert', () => {
-    const { getByText } = render(<Home />, {})
+    const {getByText} = render(<Home />, {})
     // eslint-disable-next-line no-console
     console.log(getByText('Test Button'))
 

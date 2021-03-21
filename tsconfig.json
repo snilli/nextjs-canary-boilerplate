@@ -1,21 +1,27 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": true,
+    "allowJs": false,
+    "alwaysStrict": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "noImplicitThis": true,
     "noEmit": true,
+    "noImplicitReturns": true,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
     "jsx": "preserve"
   },
   "exclude": [
@@ -28,5 +34,9 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.js"
+  ],
+  "types": [
+    "jasmine",
+    "firebase"
   ]
 }
