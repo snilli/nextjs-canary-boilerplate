@@ -10,7 +10,7 @@ module.exports = {
   ],
   name: 'libs',
   displayName: 'libs',
-  rootDir: './../../',
+  rootDir: './../',
   testMatch: [
     '<rootDir>/libs/tests/**/*.test.ts',
   ],

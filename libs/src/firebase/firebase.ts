@@ -18,19 +18,19 @@ export class FirebaseApp {
         messagingSenderId: '729964389763',
         appId: '1:729964389763:web:6118b930932c9c4ced42b6',
       })
+      // this.firebaseApp = firebase.initializeApp({
+      //   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+      //   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+      //   databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+      //   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+      //   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+      //   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+      //   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+      // })
     } else {
       this.firebaseApp = firebase.app()
     }
 
-    // this.firebase = firebase.initializeApp({
-    //   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-    //   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-    //   databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
-    //   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-    //   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-    //   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-    //   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-    // })
   }
 
   auth(): firebase.auth.Auth {

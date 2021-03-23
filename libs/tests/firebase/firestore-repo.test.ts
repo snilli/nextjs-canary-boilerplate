@@ -71,11 +71,14 @@ describe('firebase repo', () => {
     doc = await fs.getDocData(data.getId())
     expect(doc).toStrictEqual(data)
 
-    const col = await fs.getCollectionData()
+    let col = await fs.getCollectionData()
     expect(col).toStrictEqual(new Map([[data.getId(), data]]))
 
     await fs.deleteDoc(data.getId())
     doc = await fs.getDocData(data.getId())
     expect(doc).toBeUndefined()
+
+    col = await fs.getCollectionData()
+    expect(col).toBeUndefined()
   })
 })

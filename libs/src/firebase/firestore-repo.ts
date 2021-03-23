@@ -69,7 +69,6 @@ export class FirestoreRepo<T extends Model> {
     const collection = await this.getCollectionRef()
     const doc = collection.doc(id)
     const docSnap = await doc.get()
-    // await this.disconnect()
 
     if (!docSnap.exists) {
       return
@@ -90,6 +89,10 @@ export class FirestoreRepo<T extends Model> {
     collection.forEach(doc => {
       dataMap.set(doc.id, this.createFactory(doc.data()))
     })
+
+    if (!collection.size) {
+      return
+    }
 
     return dataMap
   }
