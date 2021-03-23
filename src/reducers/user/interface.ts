@@ -1,5 +1,3 @@
-import {Action} from '../interfaces/reducer.interface'
-
 export enum UserType {
   AddUser = 'ADD_USER',
   DeleteUser = 'DELETE_USER'
@@ -14,7 +12,7 @@ export interface DeleteUserAction {
   type: UserType.DeleteUser
 }
 
-export type UserAction = AddUserAction | DeleteUserAction | Action
+export type UserAction = AddUserAction | DeleteUserAction
 
 export interface UserState {
   displayName?: string
