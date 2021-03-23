@@ -1,4 +1,4 @@
-import {Action} from './reducer.interface'
+import {Action} from '../interfaces/reducer.interface'
 
 export enum UserType {
   AddUser = 'ADD_USER',
@@ -36,8 +36,4 @@ export interface UserToken {
   claims: {
     [key: string]: any
   }
-}
-
-export interface UserReducerOption {
-  state: UserState
 }
