@@ -11,7 +11,7 @@ exports[`Home page matches snapshot 1`] = `
       <h1
         class="jsx-1914694827 title"
       >
-        Welcome to 
+        Welcome to
         <a
           class="jsx-1914694827"
           href="https://nextjs.org"
@@ -22,11 +22,11 @@ exports[`Home page matches snapshot 1`] = `
       <p
         class="jsx-1914694827 description"
       >
-        Get started by editing 
+        Get started by editing
         <code
           class="jsx-1914694827"
         >
-          pages/index.tsx
+          pages/index3.tsx.bac
         </code>
       </p>
       <button
@@ -108,7 +108,7 @@ exports[`Home page matches snapshot 1`] = `
         rel="noopener noreferrer"
         target="_blank"
       >
-        Powered by 
+        Powered by
         <div
           style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
         >

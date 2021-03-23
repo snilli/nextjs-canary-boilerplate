@@ -39,7 +39,8 @@
     "reflect-metadata": "^0.1.13",
     "swr": "^0.5.4",
     "tsyringe": "^4.4.0",
-    "use-immer": "^0.5.1"
+    "use-immer": "^0.5.1",
+    "use-persisted-state": "^0.3.3"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.13.5",
@@ -52,6 +53,7 @@
     "@types/react": "^17.0.3",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
     "@typescript-eslint/parser": "^4.19.0",
+    "@types/use-persisted-state": "^0.3.0",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
