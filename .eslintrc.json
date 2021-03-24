@@ -4,9 +4,12 @@
     "@typescript-eslint"
   ],
   "extends": [
+    "airbnb",
+    "airbnb/hooks",
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript"
     // Uncomment the following lines to enable eslint-config-prettier
     // Is not enabled right now to avoid issues with the Next.js repo
     //    "prettier"
@@ -18,6 +21,22 @@
     "node": true
   },
   "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [
+        ".ts",
+        ".tsx"
+      ]
+    },
     "react": {
       "version": "detect"
     }
@@ -26,9 +45,13 @@
     "JSX": "readonly"
   },
   "rules": {
+    "semi": 0,
+    "linebreak-style": 0,
     "react/react-in-jsx-scope": 0,
     "react/display-name": 0,
     "react/prop-types": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/jsx-indent": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/explicit-member-accessibility": 0,
     "@typescript-eslint/indent": 0,
@@ -41,6 +64,46 @@
       {
         "argsIgnorePattern": "^_"
       }
+    ],
+    "import/order": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 120
+      }
+    ],
+    "object-curly-spacing": "off",
+    "comma-spacing": [
+      0,
+      {
+        "before": false,
+        "after": false
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
+    "jsx-quotes": [
+      "error",
+      "prefer-single"
     ]
     //    "no-console": [
     //      1,

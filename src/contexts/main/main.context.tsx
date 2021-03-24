@@ -1,8 +1,8 @@
 import {createContext, useContext, useEffect} from 'react'
+import {useImmerReducer} from 'use-immer'
+import createPersistedState from 'use-persisted-state'
 import {initMainState, mainReducer} from '../../reducers/main/mainReducer'
 import {MainAction, MainState} from '../../reducers/main/interface'
-import createPersistedState from 'use-persisted-state'
-import {useImmerReducer} from 'use-immer'
 import {MainContextProps, MainContextProviderValue} from './interface'
 
 const MainContext = createContext<MainContextProviderValue | undefined>(undefined)
