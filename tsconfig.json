@@ -3,6 +3,7 @@
     "experimentalDecorators": true,
     "target": "es5",
     "lib": [
+        "es6",
       "dom",
       "dom.iterable",
       "esnext"
@@ -22,6 +23,8 @@
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "jsx": "preserve"
   },
   "exclude": [

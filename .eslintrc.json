@@ -51,10 +51,12 @@
     "react/display-name": 0,
     "react/prop-types": 0,
     "react/jsx-props-no-spreading": 0,
+    "indent": 0,
     "react/jsx-indent": 0,
+    "react/jsx-indent-props": 0,
+    "@typescript-eslint/indent": 0,
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/explicit-member-accessibility": 0,
-    "@typescript-eslint/indent": 0,
     "@typescript-eslint/member-delimiter-style": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-var-requires": 0,
@@ -76,13 +78,10 @@
         "tsx": "never"
       }
     ],
-    "max-len": [
-      "error",
-      {
-        "code": 120
-      }
-    ],
+    "max-len": "off",
     "object-curly-spacing": "off",
+    "react/require-default-props": "off",
+    "react/prop-types": "off",
     "comma-spacing": [
       0,
       {
@@ -104,7 +103,8 @@
     "jsx-quotes": [
       "error",
       "prefer-single"
-    ]
+    ],
+    "arrow-body-style": 0
     //    "no-console": [
     //      1,
     //      {
