@@ -1,14 +1,7 @@
-import React from 'react'
 import clsx from 'clsx'
 import {Button, ListItem, makeStyles} from '@material-ui/core'
-import Link from 'next/link'
-
-interface Props {
-  className: string
-  href: string
-  icon: any
-  title: string
-}
+import {Icon} from 'react-feather'
+import Link from '../../../components/Link'
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -42,26 +35,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+interface Props {
+  className: string,
+  href: string,
+  icon: Icon,
+  title: string
+}
+
 const NavItem = ({
   className,
   href,
   icon: Icon,
   title,
-}: Props) => {
+  ...rest
+}: Props): JSX.Element => {
   const classes = useStyles()
 
   return (
-      // <Link >
-      <Link href={href} passHref>
-        <ListItem
-            className={clsx(classes.item, className)}
-            disableGutters
-        >
-          <Button
-              className={classes.button}
-              component={Link}
-              href={href}
-          >
+      <ListItem
+          className={clsx(classes.item, className)}
+          disableGutters
+          {...rest}
+      >
+        <Link href={href}>
+          <Button className={classes.button}>
             {Icon && (
                 <Icon
                     className={classes.icon}
@@ -69,11 +66,11 @@ const NavItem = ({
                 />
             )}
             <span className={classes.title}>
-          {title}
-        </span>
+              {title}
+            </span>
           </Button>
-        </ListItem>
-      </Link>
+        </Link>
+      </ListItem>
   )
 }
 
