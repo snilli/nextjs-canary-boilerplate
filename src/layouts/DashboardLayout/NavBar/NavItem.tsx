@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 interface Props {
-  className: string,
+  className?: string,
   href: string,
   icon: Icon,
   title: string

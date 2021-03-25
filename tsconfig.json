@@ -7,7 +7,7 @@
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": false,
+    "allowJs": true,
     "alwaysStrict": true,
     "skipLibCheck": true,
     "strict": true,
@@ -22,7 +22,10 @@
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "noUnusedLocals": true,
+    "preserveConstEnums": true,
+    "sourceMap": true
   },
   "exclude": [
     "node_modules",

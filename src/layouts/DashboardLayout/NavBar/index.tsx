@@ -117,6 +117,7 @@ const NavBar = ({onMobileClose, openMobile = false, className}: Props) => {
                 src={user.avatar}
             />
           </Link>
+
           <Typography className={className} color='textPrimary' variant='h5'>
             {user.name}
           </Typography>
