@@ -1,4 +1,4 @@
-import React from 'react'
+import {Children} from 'react'
 import Document, {Head, Html, Main, NextScript} from 'next/document'
 import {ServerStyleSheets} from '@material-ui/core/styles'
 import theme from '../theme'
@@ -64,7 +64,7 @@ MyDocument.getInitialProps = async (ctx) => {
     ...initialProps,
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [
-      ...React.Children.toArray(initialProps.styles),
+      ...Children.toArray(initialProps.styles),
       sheets.getStyleElement()],
   }
 }
