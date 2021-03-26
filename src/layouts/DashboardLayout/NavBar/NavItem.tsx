@@ -1,7 +1,8 @@
 import clsx from 'clsx'
-import {Button, ListItem, makeStyles} from '@material-ui/core'
+import {ListItem, makeStyles} from '@material-ui/core'
+import {FC} from 'react'
 import {Icon} from 'react-feather'
-import Link from '../../../components/Link'
+import LinkButton from '../../../components/LinkButton'
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -36,19 +37,19 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 interface Props {
-  className?: string,
-  href: string,
+  className?: string
+  href: string
   icon: Icon,
   title: string
 }
 
-const NavItem = ({
+const NavItem: FC<Props> = ({
   className,
   href,
   icon: Icon,
   title,
   ...rest
-}: Props): JSX.Element => {
+}) => {
   const classes = useStyles()
 
   return (
@@ -57,21 +58,20 @@ const NavItem = ({
           disableGutters
           {...rest}
       >
-        <Link href={href}>
-          <Button className={classes.button}>
-            {Icon && (
-                <Icon
-                    className={classes.icon}
-                    size='20'
-                />
-            )}
-            <span className={classes.title}>
-              {title}
-            </span>
-          </Button>
-        </Link>
+        <LinkButton href={href} className={clsx(classes.button, classes.active)}>
+          {Icon && (
+              <Icon
+                  className={classes.icon}
+                  size='20'
+              />
+          )}
+          <span className={classes.title}>
+            SDKSODKSOSKDO
+          </span>
+        </LinkButton>
       </ListItem>
   )
 }
 
 export default NavItem
+// <Link href={href} activeClassName={classes.active} className={classes.button}>

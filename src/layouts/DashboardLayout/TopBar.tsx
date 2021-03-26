@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {FC, useState} from 'react'
 import {AppBar, Badge, Hidden, IconButton, Toolbar} from '@material-ui/core'
 import Box from '@material-ui/core/Box'
 import MenuIcon from '@material-ui/icons/Menu'
@@ -11,7 +11,7 @@ interface Props {
   onMobileNavOpen: () => void
 }
 
-const TopBar = ({onMobileNavOpen, ...rest}: Props) => {
+const TopBar: FC<Props> = ({onMobileNavOpen, ...rest}) => {
   const [notifications] = useState([])
 
   return (

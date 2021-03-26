@@ -52,6 +52,8 @@ function Link(props: LinkProps) {
   })
 
   if (naked) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     return <NextComposed className={className} ref={innerRef} href={href} {...other} />
   }
 

@@ -1,4 +1,3 @@
-import {useEffect} from 'react'
 import {Avatar, Box, Button, Divider, Drawer, Hidden, List, makeStyles, Typography} from '@material-ui/core'
 import {
   AlertCircle as AlertCircleIcon,
@@ -13,6 +12,7 @@ import {
 import NavItem from './NavItem'
 import {useRouter} from 'next/router'
 import Link from '../../../components/Link'
+import {useEffect} from 'react'
 
 const user = {
   avatar: '/static/images/avatars/avatar_6.png',

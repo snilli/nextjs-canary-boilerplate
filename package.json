@@ -4,7 +4,7 @@
   "license": "MIT",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3333",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --pretty --noEmit",
@@ -43,7 +43,10 @@
     "use-persisted-state": "^0.3.3",
     "@material-ui/core": "^5.0.0-alpha.28",
     "@material-ui/icons": "^5.0.0-alpha.28",
-    "clsx": "^1.1.1"
+    "clsx": "^1.1.1",
+    "react-feather": "^2.0.9",
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.1.5"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.13.5",
@@ -71,9 +74,7 @@
     "prettier": "^2.2.1",
     "react-docgen-typescript": "^1.21.0",
     "ts-jest": "^26.5.4",
-    "typescript": "^4.2.3",
-    "react-feather": "^2.0.9",
-    "@emotion/react": "^11.1.5"
+    "typescript": "^4.2.3"
   },
   "jest": {
     "roots": [
