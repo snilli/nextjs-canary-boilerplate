@@ -1,17 +1,16 @@
 import {FC, useState} from 'react'
-import {AppBar, Badge, Hidden, IconButton, Toolbar} from '@material-ui/core'
-import Box from '@material-ui/core/Box'
+import {AppBar, Badge, Box, Hidden, IconButton, Toolbar} from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined'
 import InputIcon from '@material-ui/icons/Input'
 import Logo from '../Logo'
-import Link from '../../components/Link'
+import Link from '../../Link'
 
 interface Props {
   onMobileNavOpen: () => void
 }
 
-const TopBar: FC<Props> = ({onMobileNavOpen, ...rest}) => {
+const DashboardNavbar: FC<Props> = ({onMobileNavOpen, ...rest}) => {
   const [notifications] = useState([])
 
   return (
@@ -24,7 +23,7 @@ const TopBar: FC<Props> = ({onMobileNavOpen, ...rest}) => {
             <Logo />
           </Link>
           <Box sx={{flexGrow: 1}} />
-          <Hidden mdDown>
+          <Hidden lgDown>
             <IconButton color='inherit'>
               <Badge
                   badgeContent={notifications.length}
@@ -51,4 +50,4 @@ const TopBar: FC<Props> = ({onMobileNavOpen, ...rest}) => {
   )
 }
 
-export default TopBar
+export default DashboardNavbar

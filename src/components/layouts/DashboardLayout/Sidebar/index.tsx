@@ -1,4 +1,5 @@
-import {Avatar, Box, Button, Divider, Drawer, Hidden, List, makeStyles, Typography} from '@material-ui/core'
+import {FC, useEffect} from 'react'
+import {Avatar, Box, Button, Divider, Drawer, Hidden, List, Typography} from '@material-ui/core'
 import {
   AlertCircle as AlertCircleIcon,
   BarChart as BarChartIcon,
@@ -10,12 +11,11 @@ import {
   Users as UsersIcon,
 } from 'react-feather'
 import NavItem from './NavItem'
+import Link from 'next/link'
 import {useRouter} from 'next/router'
-import Link from '../../../components/Link'
-import {useEffect} from 'react'
 
 const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
+  avatar: '/images/avatars/avatar_6.png',
   jobTitle: 'Senior Developer',
   name: 'Katarina Smith',
 }
@@ -63,30 +63,12 @@ const items = [
   },
 ]
 
-const useStyles = makeStyles(() => ({
-  mobileDrawer: {
-    width: 256,
-  },
-  desktopDrawer: {
-    width: 256,
-    top: 64,
-    height: 'calc(100% - 64px)',
-  },
-  avatar: {
-    cursor: 'pointer',
-    width: 64,
-    height: 64,
-  },
-}))
-
 interface Props {
-  onMobileClose: () => void,
+  onMobileClose: () => void
   openMobile: boolean
-  className?: string
 }
 
-const NavBar = ({onMobileClose, openMobile = false, className}: Props) => {
-  const classes = useStyles()
+const DashboardSidebar: FC<Props> = ({onMobileClose, openMobile}) => {
   const router = useRouter()
 
   useEffect(() => {
@@ -113,15 +95,24 @@ const NavBar = ({onMobileClose, openMobile = false, className}: Props) => {
         >
           <Link href='/account'>
             <Avatar
-                className={classes.avatar}
                 src={user.avatar}
+                sx={{
+                  cursor: 'pointer',
+                  width: 64,
+                  height: 64,
+                }}
             />
           </Link>
-
-          <Typography className={className} color='textPrimary' variant='h5'>
+          <Typography
+              color='textPrimary'
+              variant='h5'
+          >
             {user.name}
           </Typography>
-          <Typography color='textSecondary' variant='body2'>
+          <Typography
+              color='textSecondary'
+              variant='body2'
+          >
             {user.jobTitle}
           </Typography>
         </Box>
@@ -184,20 +175,30 @@ const NavBar = ({onMobileClose, openMobile = false, className}: Props) => {
         <Hidden lgUp>
           <Drawer
               anchor='left'
-              classes={{paper: classes.mobileDrawer}}
               onClose={onMobileClose}
               open={openMobile}
               variant='temporary'
+              PaperProps={{
+                sx: {
+                  width: 256,
+                },
+              }}
           >
             {content}
           </Drawer>
         </Hidden>
-        <Hidden mdDown>
+        <Hidden lgDown>
           <Drawer
               anchor='left'
-              classes={{paper: classes.desktopDrawer}}
               open
               variant='persistent'
+              PaperProps={{
+                sx: {
+                  width: 256,
+                  top: 64,
+                  height: 'calc(100% - 64px)',
+                },
+              }}
           >
             {content}
           </Drawer>
@@ -206,4 +207,4 @@ const NavBar = ({onMobileClose, openMobile = false, className}: Props) => {
   )
 }
 
-export default NavBar
+export default DashboardSidebar

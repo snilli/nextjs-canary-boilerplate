@@ -5,7 +5,7 @@ import {ThemeProvider} from '@material-ui/styles'
 import theme from '../theme'
 import {useEffect} from 'react'
 import Head from 'next/head'
-import DashboardLayout from '../layouts/DashboardLayout'
+import DashboardLayout from '../components/layouts/DashboardLayout'
 
 const MyApp = ({Component, pageProps}: AppProps) => {
 
