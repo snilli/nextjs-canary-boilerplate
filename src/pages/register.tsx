@@ -20,10 +20,10 @@ const schema = Joi.object({
   firstName: Joi.string().max(255).description('First name is required').required(),
   lastName: Joi.string().max(255).description('Last name is required').required(),
   password: Joi.string().max(255).description('password is required').required(),
-  policy: Joi.boolean().invalid(true).error(new Error('This field must be checked')),
+  policy: Joi.boolean().invalid(false),
 })
 
-const Register: FC = () => {
+const RegisterPage: FC = () => {
   const router = useRouter()
   const {register, handleSubmit, errors, formState, getValues} = useForm<FormData>({
     resolver: joiResolver(schema),
@@ -43,7 +43,7 @@ const Register: FC = () => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log('sdsdsd')
-    alert(JSON.stringify(formState))
+    alert(JSON.stringify(formState, null, 2))
 
     void router.push('/dashboard')
   }
@@ -69,7 +69,7 @@ const Register: FC = () => {
                     color='textPrimary'
                     variant='h2'
                 >
-                  Create new account {JSON.stringify(formState)}
+                  Create new account
                 </Typography>
                 <Typography
                     color='textSecondary'
@@ -78,49 +78,60 @@ const Register: FC = () => {
                 >
                   Use your email to create new account
                 </Typography>
+                <code>
+                  {JSON.stringify(formState.errors)}
+                </code>
+                <hr />
+                <code>
+                  {JSON.stringify(touched)}
+                </code>
+                <hr />
+                <code>
+                  {JSON.stringify(errors)}
+                </code>
               </Box>
               <TextField
-                  error={Boolean(touched.firstName && errors.firstName)}
+                  error={Boolean(errors.firstName?.message)}
                   fullWidth
-                  helperText={touched.firstName && errors.firstName}
+                  helperText={touched.firstName && errors.firstName?.message}
                   label='First name'
                   margin='normal'
                   name='firstName'
-                  ref={register}
+                  inputRef={register}
                   value={values.firstName}
                   variant='outlined'
               />
               <TextField
-                  error={Boolean(touched.lastName && errors.lastName)}
+                  error={Boolean(errors.lastName?.message)}
                   fullWidth
-                  helperText={touched.lastName && errors.lastName}
+                  helperText={errors.lastName?.message}
                   label='Last name'
                   margin='normal'
                   name='lastName'
-                  ref={register}
+                  inputRef={register}
                   value={values.lastName}
                   variant='outlined'
               />
               <TextField
-                  error={Boolean(touched.email && errors.email)}
+                  error={Boolean(errors.email?.message)}
                   fullWidth
-                  helperText={touched.email && errors.email}
+                  helperText={errors.email?.message}
                   label='Email Address'
                   margin='normal'
                   name='email'
-                  ref={register}
+                  inputRef={register}
                   type='email'
                   value={values.email}
                   variant='outlined'
               />
               <TextField
-                  error={Boolean(touched.password && errors.password)}
+                  error={Boolean(errors.password?.message)}
                   fullWidth
-                  helperText={touched.password && errors.password}
+                  helperText={errors.password?.message}
                   label='Password'
                   margin='normal'
                   name='password'
-                  ref={register}
+                  inputRef={register}
                   type='password'
                   value={values.password}
                   variant='outlined'
@@ -135,7 +146,7 @@ const Register: FC = () => {
                 <Checkbox
                     checked={values.policy}
                     name='policy'
-                    ref={register}
+                    inputRef={register}
                 />
                 <Typography
                     color='textSecondary'
@@ -148,9 +159,9 @@ const Register: FC = () => {
                   </NextLink>
                 </Typography>
               </Box>
-              {Boolean(touched.policy && errors.policy) && (
+              {Boolean(errors.policy?.message) && (
                   <FormHelperText error>
-                    {errors.policy}
+                    This field must be checked
                   </FormHelperText>
               )}
               <Box sx={{py: 2}}>
@@ -182,4 +193,4 @@ const Register: FC = () => {
   )
 }
 
-export default Register
+export default RegisterPage
