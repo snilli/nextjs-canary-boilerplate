@@ -17,10 +17,10 @@ interface FormData {
 
 const schema = Joi.object({
   email: Joi.string().email({tlds: {allow: false}}).max(255).required(),
-  firstName: Joi.string().max(255).description('First name is required').required(),
-  lastName: Joi.string().max(255).description('Last name is required').required(),
-  password: Joi.string().max(255).description('password is required').required(),
-  policy: Joi.boolean().invalid(false),
+  firstName: Joi.string().max(255).required(),
+  lastName: Joi.string().max(255).required(),
+  password: Joi.string().max(255).required(),
+  policy: Joi.boolean().invalid(false).required(),
 })
 
 const RegisterPage: FC = () => {
