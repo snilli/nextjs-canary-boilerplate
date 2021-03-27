@@ -17,7 +17,7 @@ const CustomerListToolbar: FC = (props) => (
           Export
         </Button>
         <Button
-            color=''rimary''            variant=''ontained''        >
+            color='primary' variant='contained'>
           Add customer
         </Button>
       </Box>

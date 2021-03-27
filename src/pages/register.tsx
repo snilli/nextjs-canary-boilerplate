@@ -4,7 +4,7 @@ import {useRouter} from 'next/router'
 import {useForm} from 'react-hook-form'
 import Joi from 'joi'
 import {joiResolver} from '@hookform/resolvers/joi'
-import {FC, FormEvent} from 'react'
+import {FC, useEffect} from 'react'
 import NextLink from '../components/Link'
 
 interface FormData {
@@ -25,27 +25,16 @@ const schema = Joi.object({
 
 const RegisterPage: FC = () => {
   const router = useRouter()
-  const {register, handleSubmit, errors, formState, getValues} = useForm<FormData>({
+  const {register, handleSubmit, errors, formState} = useForm<FormData>({
     resolver: joiResolver(schema),
-    defaultValues: {
-      email: '',
-      firstName: '',
-      lastName: '',
-      password: '',
-      policy: false,
-    },
-    mode: 'all',
   })
 
   const touched = formState.touched
-  const values = getValues()
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    console.log('sdsdsd')
-    alert(JSON.stringify(formState, null, 2))
-
-    void router.push('/dashboard')
+  const onSubmit = (data: FormData) => {
+    useEffect(() => {
+      void router.prefetch('/dashboard')
+    }, [])
   }
 
   return (
@@ -98,7 +87,6 @@ const RegisterPage: FC = () => {
                   margin='normal'
                   name='firstName'
                   inputRef={register}
-                  value={values.firstName}
                   variant='outlined'
               />
               <TextField
@@ -109,7 +97,6 @@ const RegisterPage: FC = () => {
                   margin='normal'
                   name='lastName'
                   inputRef={register}
-                  value={values.lastName}
                   variant='outlined'
               />
               <TextField
@@ -121,7 +108,6 @@ const RegisterPage: FC = () => {
                   name='email'
                   inputRef={register}
                   type='email'
-                  value={values.email}
                   variant='outlined'
               />
               <TextField
@@ -133,7 +119,6 @@ const RegisterPage: FC = () => {
                   name='password'
                   inputRef={register}
                   type='password'
-                  value={values.password}
                   variant='outlined'
               />
               <Box
@@ -144,7 +129,6 @@ const RegisterPage: FC = () => {
                   }}
               >
                 <Checkbox
-                    checked={values.policy}
                     name='policy'
                     inputRef={register}
                 />
@@ -167,7 +151,7 @@ const RegisterPage: FC = () => {
               <Box sx={{py: 2}}>
                 <Button
                     color='primary'
-                    // disabled={formState.isSubmitted && !formState.isDirty}
+                    disabled={formState.isSubmitted && !formState.isDirty}
                     fullWidth
                     size='large'
                     type='submit'
