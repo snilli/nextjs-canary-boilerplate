@@ -15,7 +15,7 @@ export interface CustomerDto {
   phone: string
 }
 
-export default [
+const customers: CustomerDto[] = [
   {
     id: nanoid(20),
     address: {
@@ -157,3 +157,5 @@ export default [
     phone: '801-301-7894',
   },
 ]
+
+export default customers

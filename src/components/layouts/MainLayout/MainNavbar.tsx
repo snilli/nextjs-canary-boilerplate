@@ -1,7 +1,7 @@
 import {AppBar, Toolbar} from '@material-ui/core'
 import {FC} from 'react'
 import Logo from '../Logo'
-import Link from 'next/link'
+import Link from '../../Link'
 
 const MainNavbar: FC = (props) => (
     <AppBar

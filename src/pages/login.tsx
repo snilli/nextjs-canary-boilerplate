@@ -1,6 +1,8 @@
-import {Box, Button, Checkbox, Container, FormHelperText, TextField, Typography} from '@material-ui/core'
 import Head from 'next/head'
 import {useRouter} from 'next/router'
+import {Box, Button, Container, Grid, TextField, Typography} from '@material-ui/core'
+import FacebookIcon from '../components/icons/Facebook'
+import GoogleIcon from '../components/icons/Google'
 import {useForm} from 'react-hook-form'
 import Joi from 'joi'
 import {joiResolver} from '@hookform/resolvers/joi'
@@ -9,40 +11,36 @@ import NextLink from '../components/Link'
 
 interface FormData {
   email: string
-  firstName: string
-  lastName: string
   password: string
-  policy: boolean
 }
 
 const schema = Joi.object({
   email: Joi.string().email({tlds: {allow: false}}).max(255).required(),
-  firstName: Joi.string().max(255).required(),
-  lastName: Joi.string().max(255).required(),
   password: Joi.string().max(255).required(),
-  policy: Joi.boolean().invalid(false).required(),
 })
 
-const RegisterPage: FC = () => {
+const Login: FC = () => {
   const router = useRouter()
   const {register, handleSubmit, errors, formState} = useForm<FormData>({
+    defaultValues: {
+      email: 'demo@devias.io',
+      password: 'Password123',
+    },
     resolver: joiResolver(schema),
   })
-
-  const touched = formState.touched
 
   useEffect(() => {
     void router.prefetch('/dashboard')
   }, [router])
 
   const onSubmit = () => {
-    void router.prefetch('/dashboard')
+    void router.push('/dashboard')
   }
 
   return (
       <>
         <Head>
-          <title>Register | Material Kit</title>
+          <title>Login | Material Kit</title>
         </Head>
         <Box
             sx={{
@@ -60,36 +58,64 @@ const RegisterPage: FC = () => {
                     color='textPrimary'
                     variant='h2'
                 >
-                  Create new account
+                  Sign in
                 </Typography>
                 <Typography
                     color='textSecondary'
                     gutterBottom
                     variant='body2'
                 >
-                  Use your email to create new account
+                  Sign in on the internal platform
                 </Typography>
               </Box>
-              <TextField
-                  error={Boolean(errors.firstName?.message)}
-                  fullWidth
-                  helperText={touched.firstName && errors.firstName?.message}
-                  label='First name'
-                  margin='normal'
-                  name='firstName'
-                  inputRef={register}
-                  variant='outlined'
-              />
-              <TextField
-                  error={Boolean(errors.lastName?.message)}
-                  fullWidth
-                  helperText={errors.lastName?.message}
-                  label='Last name'
-                  margin='normal'
-                  name='lastName'
-                  inputRef={register}
-                  variant='outlined'
-              />
+              <Grid
+                  container
+                  spacing={3}
+              >
+                <Grid
+                    item
+                    xs={12}
+                    md={6}
+                >
+                  <Button
+                      color='primary'
+                      fullWidth
+                      startIcon={<FacebookIcon />}
+                      size='large'
+                      variant='contained'
+                  >
+                    Login with Facebook
+                  </Button>
+                </Grid>
+                <Grid
+                    item
+                    xs={12}
+                    md={6}
+                >
+                  <Button
+                      fullWidth
+                      startIcon={<GoogleIcon />}
+                      size='large'
+                      variant='contained'
+                  >
+                    Login with Google
+                  </Button>
+                </Grid>
+              </Grid>
+              <Box
+                  sx={{
+                    pb: 1,
+                    pt: 3,
+                  }}
+              >
+                <Typography
+                    align='center'
+                    color='textSecondary'
+                    variant='body1'
+                >
+                  or login with email address
+                </Typography>
+              </Box>
               <TextField
                   error={Boolean(errors.email?.message)}
                   fullWidth
@@ -97,9 +123,9 @@ const RegisterPage: FC = () => {
                   label='Email Address'
                   margin='normal'
                   name='email'
-                  inputRef={register}
                   type='email'
                   variant='outlined'
+                  inputRef={register}
               />
               <TextField
                   error={Boolean(errors.password?.message)}
@@ -108,37 +134,10 @@ const RegisterPage: FC = () => {
                   label='Password'
                   margin='normal'
                   name='password'
-                  inputRef={register}
                   type='password'
                   variant='outlined'
+                  inputRef={register}
               />
-              <Box
-                  sx={{
-                    alignItems: 'center',
-                    display: 'flex',
-                    ml: -1,
-                  }}
-              >
-                <Checkbox
-                    name='policy'
-                    inputRef={register}
-                />
-                <Typography
-                    color='textSecondary'
-                    variant='body1'
-                >
-                  I have read the
-                  {' '}
-                  <NextLink href='#' color='primary' underline='always' variant='h6'>
-                    Terms and Conditions
-                  </NextLink>
-                </Typography>
-              </Box>
-              {Boolean(errors.policy?.message) && (
-                  <FormHelperText error>
-                    This field must be checked
-                  </FormHelperText>
-              )}
               <Box sx={{py: 2}}>
                 <Button
                     color='primary'
@@ -148,17 +147,17 @@ const RegisterPage: FC = () => {
                     type='submit'
                     variant='contained'
                 >
-                  Sign up now
+                  Sign in now
                 </Button>
               </Box>
               <Typography
                   color='textSecondary'
                   variant='body1'
               >
-                Have an account?
+                Don&apos;t have an account?
                 {' '}
-                <NextLink href='/login' variant='h6'>
-                  Sign in
+                <NextLink href='/register' variant='h6'>
+                  Sign up
                 </NextLink>
               </Typography>
             </form>
@@ -168,4 +167,4 @@ const RegisterPage: FC = () => {
   )
 }
 
-export default RegisterPage
+export default Login

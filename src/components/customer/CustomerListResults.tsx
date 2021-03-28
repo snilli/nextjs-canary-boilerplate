@@ -16,7 +16,7 @@ import {
   Typography,
 } from '@material-ui/core'
 import {CustomerDto} from './customer-dto'
-import getInitials from '../../utils/getInitials'
+import toUpperCase from '../../utils/getInitials'
 import {SwitchBaseProps} from '@material-ui/core/internal/SwitchBase'
 
 interface Props {
@@ -128,7 +128,7 @@ const CustomerListResults: FC<Props> = ({customers, ...rest}) => {
                               src={customer.avatarUrl}
                               sx={{mr: 2}}
                           >
-                            {getInitials(customer.name)}
+                            {toUpperCase(customer.name)}
                           </Avatar>
                           <Typography
                               color='textPrimary'

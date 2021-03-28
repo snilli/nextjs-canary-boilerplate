@@ -1,6 +1,8 @@
-export default (name = ''): string => name
+const toUpperCase = (name = ''): string => name
     .replace(/\s+/, ' ')
     .split(' ')
     .slice(0, 2)
     .map((v) => v && v[0].toUpperCase())
-    .join('');
+    .join('')
+
+export default toUpperCase

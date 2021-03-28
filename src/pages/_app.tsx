@@ -6,8 +6,12 @@ import theme from '../theme'
 import {useEffect} from 'react'
 import Head from 'next/head'
 import DashboardLayout from '../components/layouts/DashboardLayout'
+import {useRouter} from 'next/router'
+import MainLayout from '../components/layouts/MainLayout'
 
 const MyApp = ({Component, pageProps}: AppProps) => {
+  const router = useRouter()
+  const unAuthPath = ['/404', '/register', '/login']
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -23,21 +27,26 @@ const MyApp = ({Component, pageProps}: AppProps) => {
           <title>My page</title>
           <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width' />
         </Head>
-        <ThemeProvider theme={theme}>
-          <MainContextProvider>
-            <GlobalStyles />
-            <DashboardLayout>
-              <Component {...pageProps} />
-            </DashboardLayout>
-          </MainContextProvider>
-        </ThemeProvider>
+        {!unAuthPath.includes(router.pathname) ?
+            <ThemeProvider theme={theme}>
+              <MainContextProvider>
+                <GlobalStyles />
+                <DashboardLayout>
+                  <Component {...pageProps} />
+                </DashboardLayout>
+              </MainContextProvider>
+            </ThemeProvider> :
+            <ThemeProvider theme={theme}>
+              <MainContextProvider>
+                <GlobalStyles />
+                <MainLayout>
+                  <Component {...pageProps} />
+                </MainLayout>
+              </MainContextProvider>
+            </ThemeProvider>
+        }
       </>
   )
 }
 
-// <MainContextProvider>
-//   <GlobalStyles />
-//   <MainLayout />
-//   <Component {...pageProps} />
-// </MainContextProvider>
 export default MyApp
