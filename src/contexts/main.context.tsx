@@ -1,11 +1,12 @@
 import {createContext, useContext, useEffect} from 'react'
-import {initMainState, mainReducer} from '../../reducers/main/mainReducer'
-import {MainAction, MainState} from '../../reducers/main/interface'
+import {initMainState, mainReducer} from '../reducers/main/mainReducer'
+import {MainAction, MainState} from '../reducers/main/interface'
 import createPersistedState from 'use-persisted-state'
 import {useImmerReducer} from 'use-immer'
-import {MainContextProps, MainContextProviderValue} from './interface'
+import {ContainerContextProviderValue, MainContextProps} from './interfaces/main.context.interface'
+import {container} from 'tsyringe'
 
-const MainContext = createContext<MainContextProviderValue | undefined>(undefined)
+const MainContext = createContext<ContainerContextProviderValue | undefined>(undefined)
 const useMainStatePersist = createPersistedState('main-state')
 
 const MainContextProvider = ({children}: MainContextProps): JSX.Element => {
@@ -19,7 +20,7 @@ const MainContextProvider = ({children}: MainContextProps): JSX.Element => {
   }, [mainState, setMainStatePersist])
 
   return (
-      <MainContext.Provider value={{mainState, dispatch}}>
+      <MainContext.Provider value={{mainState, dispatch, container}}>
         {children}
       </MainContext.Provider>
   )
@@ -27,4 +28,4 @@ const MainContextProvider = ({children}: MainContextProps): JSX.Element => {
 
 export default MainContextProvider
 
-export const useMainState: () => MainContextProviderValue | undefined = () => useContext(MainContext)
+export const useMainContext: () => ContainerContextProviderValue | undefined = () => useContext(MainContext)

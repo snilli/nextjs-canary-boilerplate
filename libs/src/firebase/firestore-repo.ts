@@ -1,4 +1,3 @@
-import 'reflect-metadata'
 import {injectable} from 'tsyringe'
 import {FirebaseApp} from './firebase'
 import {FirestoreRepoCreateFactory, FirestoreRepoOptions} from './interfaces/firestore-repo.interface'

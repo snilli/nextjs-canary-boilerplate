@@ -1,17 +1,17 @@
+import 'reflect-metadata'
 import {AppProps} from 'next/app'
-import MainContextProvider from '../contexts/main/main.context'
-import GlobalStyles from '../contexts/global-styles/global-styles.context'
+import MainContextProvider from '../contexts/main.context'
+import GlobalStyles from '../contexts/global-styles.context'
 import {ThemeProvider} from '@material-ui/styles'
 import theme from '../theme'
 import {useEffect} from 'react'
 import Head from 'next/head'
-import DashboardLayout from '../components/layouts/DashboardLayout'
-import {useRouter} from 'next/router'
-import MainLayout from '../components/layouts/MainLayout'
+import ContainerContextProvider from '../contexts/container.context'
+import AuthContextProvider from '../contexts/auth.context'
 
 const MyApp = ({Component, pageProps}: AppProps) => {
-  const router = useRouter()
-  const unAuthPath = ['/404', '/register', '/login']
+  // const auth = container.resolve(FirebaseAuth)
+  // const user = auth.getUser()
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -27,26 +27,29 @@ const MyApp = ({Component, pageProps}: AppProps) => {
           <title>My page</title>
           <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width' />
         </Head>
-        {!unAuthPath.includes(router.pathname) ?
+        <ContainerContextProvider>
+          <AuthContextProvider>
+            {/*{!unAuthPath.includes(router.pathname) ?*/}
             <ThemeProvider theme={theme}>
               <MainContextProvider>
                 <GlobalStyles />
-                <DashboardLayout>
-                  <Component {...pageProps} />
-                </DashboardLayout>
-              </MainContextProvider>
-            </ThemeProvider> :
-            <ThemeProvider theme={theme}>
-              <MainContextProvider>
-                <GlobalStyles />
-                <MainLayout>
-                  <Component {...pageProps} />
-                </MainLayout>
+                <Component {...pageProps} />
               </MainContextProvider>
             </ThemeProvider>
-        }
+          </AuthContextProvider>
+        </ContainerContextProvider>
       </>
   )
 }
 
 export default MyApp
+
+//
+// {user ?
+//     <DashboardLayout>
+//       <Component {...pageProps} />
+//     </DashboardLayout> :
+//     <MainLayout>
+//       <Component {...pageProps} />
+//     </MainLayout>
+// }

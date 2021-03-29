@@ -4,9 +4,11 @@ import ProductListToolbar from '../components/product/ProductListToolbar'
 import ProductCard from '../components/product/ProductCard'
 import products from '../components/product/product-dto'
 import {FC} from 'react'
+import DashboardLayout from '../components/layouts/DashboardLayout'
+import WithAuthUser from '../wrapper/WithAuthUser'
 
 const Products: FC = () => (
-    <>
+    <DashboardLayout>
       <Head>
         <title>Products | Material Kit</title>
       </Head>
@@ -52,7 +54,7 @@ const Products: FC = () => (
           </Box>
         </Container>
       </Box>
-    </>
+    </DashboardLayout>
 )
 
-export default Products
+export default WithAuthUser()(Products)

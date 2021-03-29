@@ -3,7 +3,7 @@ import Head from 'next/head'
 import {FC} from 'react'
 
 const NotFoundView: FC = () => (
-    <div className='container'>
+    <>
       <Head>
         <title>404 Page not fount</title>
       </Head>
@@ -17,18 +17,10 @@ const NotFoundView: FC = () => (
           }}
       >
         <Container maxWidth='md'>
-          <Typography
-              align='center'
-              color='textPrimary'
-              variant='h1'
-          >
+          <Typography align='center' color='textPrimary' variant='h1'>
             404: The page you are looking for isn’t here
           </Typography>
-          <Typography
-              align='center'
-              color='textPrimary'
-              variant='subtitle2'
-          >
+          <Typography align='center' color='textPrimary' variant='subtitle2'>
             You either tried some shady route or you came here by mistake.
             Whichever it is, try using the navigation
           </Typography>
@@ -47,38 +39,38 @@ const NotFoundView: FC = () => (
         </Container>
       </Box>
 
-      <style jsx>{`
-        .container {
-          min-height: calc(100vh - 64px);
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
+      {/*<style jsx>{`*/}
+      {/*  .container {*/}
+      {/*    min-height: calc(100vh - 64px);*/}
+      {/*    padding: 0 0.5rem;*/}
+      {/*    display: flex;*/}
+      {/*    flex-direction: column;*/}
+      {/*    justify-content: center;*/}
+      {/*    align-items: center;*/}
+      {/*  }*/}
 
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
+      {/*  @media (max-width: 600px) {*/}
+      {/*    .grid {*/}
+      {/*      width: 100%;*/}
+      {/*      flex-direction: column;*/}
+      {/*    }*/}
+      {/*  }*/}
+      {/*`}</style>*/}
 
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-          Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-        }
+      {/*<style jsx global>{`*/}
+      {/*  html,*/}
+      {/*  body {*/}
+      {/*    padding: 0;*/}
+      {/*    margin: 0;*/}
+      {/*    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,*/}
+      {/*    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;*/}
+      {/*  }*/}
 
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
+      {/*  * {*/}
+      {/*    box-sizing: border-box;*/}
+      {/*  }*/}
+      {/*`}</style>*/}
+    </>
 )
 
 export default NotFoundView

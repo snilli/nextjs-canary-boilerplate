@@ -6,6 +6,7 @@ import Joi from 'joi'
 import {joiResolver} from '@hookform/resolvers/joi'
 import {FC, useEffect} from 'react'
 import NextLink from '../components/Link'
+import MainLayout from '../components/layouts/MainLayout'
 
 interface FormData {
   email: string
@@ -40,7 +41,7 @@ const RegisterPage: FC = () => {
   }
 
   return (
-      <>
+      <MainLayout>
         <Head>
           <title>Register | Material Kit</title>
         </Head>
@@ -164,7 +165,7 @@ const RegisterPage: FC = () => {
             </form>
           </Container>
         </Box>
-      </>
+      </MainLayout>
   )
 }
 

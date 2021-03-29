@@ -8,6 +8,7 @@ import Joi from 'joi'
 import {joiResolver} from '@hookform/resolvers/joi'
 import {FC, useEffect} from 'react'
 import NextLink from '../components/Link'
+import MainLayout from '../components/layouts/MainLayout'
 
 interface FormData {
   email: string
@@ -38,7 +39,7 @@ const Login: FC = () => {
   }
 
   return (
-      <>
+      <MainLayout>
         <Head>
           <title>Login | Material Kit</title>
         </Head>
@@ -163,7 +164,7 @@ const Login: FC = () => {
             </form>
           </Container>
         </Box>
-      </>
+      </MainLayout>
   )
 }
 

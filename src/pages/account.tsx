@@ -3,9 +3,11 @@ import {FC} from 'react'
 import Head from 'next/head'
 import AccountProfile from '../components/account/AccountProfile'
 import AccountProfileDetails from '../components/account/AccountProfileDetails'
+import DashboardLayout from '../components/layouts/DashboardLayout'
+import WithAuthUser from '../wrapper/WithAuthUser'
 
 const AccountPage: FC = () => (
-    <>
+    <DashboardLayout>
       <Head>
         <title>Account | Material Kit</title>
       </Head>
@@ -40,7 +42,7 @@ const AccountPage: FC = () => (
           </Grid>
         </Container>
       </Box>
-    </>
+    </DashboardLayout>
 )
 
-export default AccountPage
+export default WithAuthUser()(AccountPage)

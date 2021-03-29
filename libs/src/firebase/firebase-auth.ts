@@ -1,15 +1,19 @@
 import {FirebaseApp} from './firebase'
 import {UserInfo} from './interfaces/auth.interface'
 import firebase from 'firebase'
-import UserCredential = firebase.auth.UserCredential
+import {injectable} from 'tsyringe'
 
+export type User = firebase.User
+type UserCredential = firebase.auth.UserCredential
+
+@injectable()
 export class FirebaseAuth {
   constructor(
       private firebase: FirebaseApp,
   ) {
   }
 
-  private static async getUser(userCredential: UserCredential): Promise<UserInfo | undefined> {
+  private static async getUserInfo(userCredential: UserCredential): Promise<UserInfo | undefined> {
     const user = userCredential.user
 
     if (!user) {
@@ -44,7 +48,7 @@ export class FirebaseAuth {
         .auth()
         .signInWithEmailAndPassword(email, password)
 
-    const user = await FirebaseAuth.getUser(userCredential)
+    const user = await FirebaseAuth.getUserInfo(userCredential)
     if (!user) {
       throw new Error('User not found')
     }
@@ -59,7 +63,7 @@ export class FirebaseAuth {
         .auth()
         .signInWithPopup(new firebase.auth.GoogleAuthProvider())
 
-    const user = await FirebaseAuth.getUser(userCredential)
+    const user = await FirebaseAuth.getUserInfo(userCredential)
     if (!user) {
       throw new Error('User not found')
     }
@@ -75,10 +79,18 @@ export class FirebaseAuth {
     const currentUser = this.firebase.auth().currentUser
     if (!currentUser) {
       return undefined
-
     }
 
-    return await currentUser.getIdToken()
+    return await currentUser.getIdToken(true)
+  }
+
+  getUser(): User | undefined {
+    const currentUser = this.firebase.auth().currentUser
+    if (!currentUser) {
+      return undefined
+    }
+
+    return currentUser
   }
 
   private async setPersistence(): Promise<void> {

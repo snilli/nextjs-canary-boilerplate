@@ -5,4 +5,4 @@ const toUpperCase = (name = ''): string => name
     .map((v) => v && v[0].toUpperCase())
     .join('')
 
-export default toUpperCase
+export {toUpperCase}

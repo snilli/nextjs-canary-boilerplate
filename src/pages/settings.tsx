@@ -3,9 +3,11 @@ import Head from 'next/head'
 import SettingsNotifications from '../components/settings/SettingsNotifications'
 import SettingsPassword from '../components/settings/SettingsPassword'
 import {FC} from 'react'
+import DashboardLayout from '../components/layouts/DashboardLayout'
+import WithAuthUser from '../wrapper/WithAuthUser'
 
 const SettingsView: FC = () => (
-    <>
+    <DashboardLayout>
       <Head>
         <title>Settings | Material Kit</title>
       </Head>
@@ -23,7 +25,7 @@ const SettingsView: FC = () => (
           </Box>
         </Container>
       </Box>
-    </>
+    </DashboardLayout>
 )
 
-export default SettingsView
+export default WithAuthUser()(SettingsView)

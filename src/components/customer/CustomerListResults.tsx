@@ -16,7 +16,7 @@ import {
   Typography,
 } from '@material-ui/core'
 import {CustomerDto} from './customer-dto'
-import toUpperCase from '../../utils/getInitials'
+import {toUpperCase} from '../../utils/string'
 import {SwitchBaseProps} from '@material-ui/core/internal/SwitchBase'
 
 interface Props {

@@ -63,6 +63,7 @@ const SettingsNotifications: FC = (props) => (
               />
               <FormControlLabel
                   control={<Checkbox />}
+                  color='primary'
                   label='Text Messages'
               />
               <FormControlLabel

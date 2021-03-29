@@ -9,9 +9,11 @@ import TasksProgress from '../components/dashboard/TasksProgress'
 import TotalCustomers from '../components/dashboard/TotalCustomers'
 import Budget from '../components/dashboard/Budget'
 import {FC} from 'react'
+import DashboardLayout from '../components/layouts/DashboardLayout'
+import WithAuthUser from '../wrapper/WithAuthUser'
 
 const Dashboard: FC = () => (
-    <>
+    <DashboardLayout>
       <Head>
         <title>Dashboard | Material Kit</title>
       </Head>
@@ -102,7 +104,7 @@ const Dashboard: FC = () => (
           </Grid>
         </Container>
       </Box>
-    </>
+    </DashboardLayout>
 )
 
-export default Dashboard
+export default WithAuthUser()(Dashboard)
