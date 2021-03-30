@@ -1,7 +1,7 @@
 import {FirestoreRepo} from '../../src/firebase/firestore-repo'
 import {FirebaseApp} from '../../src/firebase/firebase'
 import {container} from 'tsyringe'
-import {Model} from '../../src/ddd/model'
+import {Entity} from '../../src/ddd/entity'
 import {nanoid} from 'nanoid'
 
 describe('firebase repo', () => {
@@ -11,7 +11,7 @@ describe('firebase repo', () => {
     lastName: string
   }
 
-  class A extends Model {
+  class A extends Entity {
     static create(option: {
       name: string
       lastName: string
@@ -26,7 +26,9 @@ describe('firebase repo', () => {
       name: string
       lastName: string
     }) {
-      super()
+      super({
+        id: option.id as string,
+      })
 
       this.state = {
         id: option.id ?? nanoid(20),

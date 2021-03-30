@@ -1,5 +1,5 @@
 import {FirebaseApp} from './firebase'
-import {UserInfo} from './interfaces/auth.interface'
+import {UserInfo} from './interfaces/firebase-auth.interface'
 import firebase from 'firebase'
 import {injectable} from 'tsyringe'
 
@@ -13,14 +13,12 @@ export class FirebaseAuth {
   ) {
   }
 
-  private static async getUserInfo(userCredential: UserCredential): Promise<UserInfo | undefined> {
+  private static getUserInfo(userCredential: UserCredential): UserInfo | undefined {
     const user = userCredential.user
 
     if (!user) {
       return
     }
-
-    const decodeToken = await user.getIdTokenResult()
 
     return {
       displayName: user.displayName ?? undefined,
@@ -29,15 +27,6 @@ export class FirebaseAuth {
       photoURL: user.providerId,
       providerId: user.providerId,
       uid: user.uid,
-      token: {
-        token: decodeToken.token,
-        expirationTime: decodeToken.expirationTime,
-        authTime: decodeToken.authTime,
-        issuedAtTime: decodeToken.issuedAtTime,
-        signInProvider: decodeToken.signInProvider ?? undefined,
-        signInSecondFactor: decodeToken.signInSecondFactor ?? undefined,
-        claims: decodeToken.claims,
-      },
     }
   }
 
@@ -48,7 +37,7 @@ export class FirebaseAuth {
         .auth()
         .signInWithEmailAndPassword(email, password)
 
-    const user = await FirebaseAuth.getUserInfo(userCredential)
+    const user = FirebaseAuth.getUserInfo(userCredential)
     if (!user) {
       throw new Error('User not found')
     }
@@ -63,7 +52,7 @@ export class FirebaseAuth {
         .auth()
         .signInWithPopup(new firebase.auth.GoogleAuthProvider())
 
-    const user = await FirebaseAuth.getUserInfo(userCredential)
+    const user = FirebaseAuth.getUserInfo(userCredential)
     if (!user) {
       throw new Error('User not found')
     }

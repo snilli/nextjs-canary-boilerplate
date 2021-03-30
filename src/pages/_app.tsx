@@ -10,8 +10,6 @@ import ContainerContextProvider from '../contexts/container.context'
 import AuthContextProvider from '../contexts/auth.context'
 
 const MyApp = ({Component, pageProps}: AppProps) => {
-  // const auth = container.resolve(FirebaseAuth)
-  // const user = auth.getUser()
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -29,7 +27,6 @@ const MyApp = ({Component, pageProps}: AppProps) => {
         </Head>
         <ContainerContextProvider>
           <AuthContextProvider>
-            {/*{!unAuthPath.includes(router.pathname) ?*/}
             <ThemeProvider theme={theme}>
               <MainContextProvider>
                 <GlobalStyles />
@@ -43,13 +40,3 @@ const MyApp = ({Component, pageProps}: AppProps) => {
 }
 
 export default MyApp
-
-//
-// {user ?
-//     <DashboardLayout>
-//       <Component {...pageProps} />
-//     </DashboardLayout> :
-//     <MainLayout>
-//       <Component {...pageProps} />
-//     </MainLayout>
-// }

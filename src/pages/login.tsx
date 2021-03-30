@@ -9,6 +9,11 @@ import {joiResolver} from '@hookform/resolvers/joi'
 import {FC, useEffect} from 'react'
 import NextLink from '../components/Link'
 import MainLayout from '../components/layouts/MainLayout'
+import {useAuthContext} from '../contexts/auth.context'
+import {FirebaseAuth} from '../../libs/src/firebase/firebase-auth'
+import {useMainContext} from '../contexts/main.context'
+import {UserAction} from '../reducers/user/user.action'
+import {ContainerContextProviderValue} from '../contexts/interfaces/main.context.interface'
 
 interface FormData {
   email: string
@@ -21,7 +26,16 @@ const schema = Joi.object({
 })
 
 const Login: FC = () => {
+  const auth = useAuthContext() as FirebaseAuth
   const router = useRouter()
+  const {dispatch} = useMainContext() as ContainerContextProviderValue
+
+  const handleOnClick = async () => {
+    const user = await auth.signinWithGoogle()
+
+    dispatch(UserAction.addUser(user))
+    await router.prefetch('/dashboard')
+  }
   const {register, handleSubmit, errors, formState} = useForm<FormData>({
     defaultValues: {
       email: 'demo@devias.io',
@@ -98,6 +112,7 @@ const Login: FC = () => {
                       startIcon={<GoogleIcon />}
                       size='large'
                       variant='contained'
+                      onClick={(e) => handleOnClick}
                   >
                     Login with Google
                   </Button>

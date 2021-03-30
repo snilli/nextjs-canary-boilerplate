@@ -4,7 +4,6 @@ import {MainAction, MainState} from '../reducers/main/interface'
 import createPersistedState from 'use-persisted-state'
 import {useImmerReducer} from 'use-immer'
 import {ContainerContextProviderValue, MainContextProps} from './interfaces/main.context.interface'
-import {container} from 'tsyringe'
 
 const MainContext = createContext<ContainerContextProviderValue | undefined>(undefined)
 const useMainStatePersist = createPersistedState('main-state')
@@ -20,7 +19,7 @@ const MainContextProvider = ({children}: MainContextProps): JSX.Element => {
   }, [mainState, setMainStatePersist])
 
   return (
-      <MainContext.Provider value={{mainState, dispatch, container}}>
+      <MainContext.Provider value={{mainState, dispatch}}>
         {children}
       </MainContext.Provider>
   )

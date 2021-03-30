@@ -2,10 +2,10 @@ import {injectable} from 'tsyringe'
 import {FirebaseApp} from './firebase'
 import {FirestoreRepoCreateFactory, FirestoreRepoOptions} from './interfaces/firestore-repo.interface'
 import firebase from 'firebase'
-import {Model} from '../ddd/model'
+import {Entity} from '../ddd/entity'
 
 @injectable()
-export class FirestoreRepo<T extends Model> {
+export class FirestoreRepo<T extends Entity> {
   protected createFactory: FirestoreRepoCreateFactory<T>
   protected collectionName: string
 
