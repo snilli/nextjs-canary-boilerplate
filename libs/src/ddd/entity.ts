@@ -12,7 +12,7 @@ export class Entity<T extends EntityState = EntityState> {
     return this.state.id
   }
 
-  toJSON(): T {
+  toJSON(): Record<string, any> {
     return serializer(this.state)
   }
 
