@@ -1,11 +1,7 @@
 import {MainAction, MainState} from '../../reducers/main/interface'
-import {Dispatch, ReactNode} from 'react'
+import {Dispatch} from 'react'
 
-export interface ContainerContextProviderValue {
+export interface MainContextValue {
   mainState: MainState
   dispatch: Dispatch<MainAction>
-}
-
-export interface MainContextProps {
-  children: ReactNode
 }

@@ -1,16 +1,14 @@
-import {FirebaseApp} from './firebase'
+import {Auth, FirebaseApp, User, UserCredential} from './firebase'
 import {UserInfo} from './interfaces/firebase-auth.interface'
-import firebase from 'firebase'
 import {injectable} from 'tsyringe'
-
-export type User = firebase.User
-type UserCredential = firebase.auth.UserCredential
+import firebase from 'firebase/app'
 
 @injectable()
 export class FirebaseAuth {
   constructor(
       private firebase: FirebaseApp,
   ) {
+    this.signOut.bind(this)
   }
 
   private static getUserInfo(userCredential: UserCredential): UserInfo | undefined {
@@ -24,7 +22,7 @@ export class FirebaseAuth {
       displayName: user.displayName ?? undefined,
       email: user.email ?? undefined,
       phoneNumber: user.phoneNumber ?? undefined,
-      photoURL: user.providerId,
+      photoURL: user.photoURL ?? undefined,
       providerId: user.providerId,
       uid: user.uid,
     }
@@ -82,7 +80,11 @@ export class FirebaseAuth {
     return currentUser
   }
 
+  getAuth(): Auth {
+    return this.firebase.auth()
+  }
+
   private async setPersistence(): Promise<void> {
-    await this.firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    await this.firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
   }
 }

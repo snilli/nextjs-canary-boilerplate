@@ -1,9 +1,11 @@
-import {createContext, useContext} from 'react'
-import {ContainerContextProps} from './interfaces/container.context.interface'
+import {createContext, ReactNode, useContext} from 'react'
 import {container, DependencyContainer, InjectionToken} from 'tsyringe'
 
-const ContainerContext = createContext<DependencyContainer>(container)
+export interface ContainerContextProps {
+  children: ReactNode
+}
 
+const ContainerContext = createContext<DependencyContainer>(container)
 const ContainerContextProvider = ({children}: ContainerContextProps): JSX.Element => {
   return (
       <ContainerContext.Provider value={container}>

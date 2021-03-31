@@ -5,13 +5,19 @@ import NotificationsIcon from '@material-ui/icons/NotificationsOutlined'
 import InputIcon from '@material-ui/icons/Input'
 import Logo from '../Logo'
 import Link from '../../Link'
+import {useAuthContext} from '../../../contexts/auth.context'
 
 interface Props {
   onMobileNavOpen: () => void
 }
 
 const DashboardNavbar: FC<Props> = ({onMobileNavOpen, ...rest}) => {
+  const auth = useAuthContext()
   const [notifications] = useState([])
+
+  const handleLogout = async () => {
+    await auth.signOut()
+  }
 
   return (
       <AppBar
@@ -33,7 +39,7 @@ const DashboardNavbar: FC<Props> = ({onMobileNavOpen, ...rest}) => {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <IconButton color='inherit'>
+            <IconButton color='inherit' onClick={handleLogout}>
               <InputIcon />
             </IconButton>
           </Hidden>

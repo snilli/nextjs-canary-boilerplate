@@ -1,7 +1,13 @@
+import firebase from 'firebase/app'
 import 'firebase/auth' // If you need it
 import 'firebase/firestore'
-import firebase from 'firebase'
 import {injectable} from 'tsyringe'
+
+export type User = firebase.User
+export type UserCredential = firebase.auth.UserCredential
+export type Auth = firebase.auth.Auth
+export type CollectionReference<T> = firebase.firestore.CollectionReference<T>
+export type DocumentReference<T> = firebase.firestore.DocumentReference<T>
 
 @injectable()
 export class FirebaseApp {
@@ -17,6 +23,10 @@ export class FirebaseApp {
         storageBucket: 'random-anything.appspot.com',
         messagingSenderId: '729964389763',
         appId: '1:729964389763:web:6118b930932c9c4ced42b6',
+      })
+
+      this.firebaseApp.firestore().settings({
+        ignoreUndefinedProperties: true,
       })
       // this.firebaseApp = firebase.initializeApp({
       //   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,

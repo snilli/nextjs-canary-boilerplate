@@ -5,44 +5,57 @@ import AccountProfile from '../components/account/AccountProfile'
 import AccountProfileDetails from '../components/account/AccountProfileDetails'
 import DashboardLayout from '../components/layouts/DashboardLayout'
 import WithAuthUser from '../wrapper/WithAuthUser'
+import {useMainContext} from '../contexts/main.context'
+import {useAuthContext} from '../contexts/auth.context'
 
-const AccountPage: FC = () => (
-    <DashboardLayout>
-      <Head>
-        <title>Account | Material Kit</title>
-      </Head>
-      <Box
-          sx={{
-            backgroundColor: 'background.default',
-            minHeight: '100%',
-            py: 3,
-          }}
-      >
-        <Container maxWidth='lg'>
-          <Grid
-              container
-              spacing={3}
-          >
+const AccountPage: FC = () => {
+  const {mainState} = useMainContext()
+  const auth = useAuthContext()
+  const currentUser = auth.getUser()
+  const user = mainState.user
+
+  if (!currentUser && !user) {
+    throw new Error('user not found')
+  }
+
+  return (
+      <DashboardLayout>
+        <Head>
+          <title>Account | Material Kit</title>
+        </Head>
+        <Box
+            sx={{
+              backgroundColor: 'background.default',
+              minHeight: '100%',
+              py: 3,
+            }}
+        >
+          <Container maxWidth='lg'>
             <Grid
-                item
-                lg={4}
-                md={6}
-                xs={12}
+                container
+                spacing={3}
             >
-              <AccountProfile />
+              <Grid
+                  item
+                  lg={4}
+                  md={6}
+                  xs={12}
+              >
+                <AccountProfile />
+              </Grid>
+              <Grid
+                  item
+                  lg={8}
+                  md={6}
+                  xs={12}
+              >
+                <AccountProfileDetails />
+              </Grid>
             </Grid>
-            <Grid
-                item
-                lg={8}
-                md={6}
-                xs={12}
-            >
-              <AccountProfileDetails />
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-    </DashboardLayout>
-)
+          </Container>
+        </Box>
+      </DashboardLayout>
+  )
+}
 
 export default WithAuthUser()(AccountPage)

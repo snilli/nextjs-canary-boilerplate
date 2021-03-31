@@ -1,4 +1,5 @@
 import {EntityState} from './interfaces/entity.interface'
+import {serializer} from '../../../src/utils/json'
 
 export class Entity<T extends EntityState = EntityState> {
   protected state: T
@@ -12,7 +13,7 @@ export class Entity<T extends EntityState = EntityState> {
   }
 
   toJSON(): T {
-    return this.state
+    return serializer(this.state)
   }
 
   toString(): string {
