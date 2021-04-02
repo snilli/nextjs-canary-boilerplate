@@ -4,7 +4,7 @@ import SettingsNotifications from '../components/settings/SettingsNotifications'
 import SettingsPassword from '../components/settings/SettingsPassword'
 import {FC} from 'react'
 import DashboardLayout from '../components/layouts/DashboardLayout'
-import WithAuthUser from '../wrapper/WithAuthUser'
+import WithAuthUser from '../components/wrapper/WithAuthUser'
 
 const SettingsView: FC = () => (
     <DashboardLayout>

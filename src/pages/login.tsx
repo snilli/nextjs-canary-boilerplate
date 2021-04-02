@@ -13,7 +13,7 @@ import {useAuthContext} from '../contexts/auth.context'
 import {useMainContext} from '../contexts/main.context'
 import UserContextProvider, {useUserContext} from '../contexts/user.context'
 import {UserEntity} from '../core/user/entity/user.entity'
-import WithUserContext from '../wrapper/WithUserContext'
+import WithUserContext from '../components/wrapper/WithUserContext'
 import {UserAction} from '../reducers/user/user.action'
 
 interface FormData {

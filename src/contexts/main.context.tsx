@@ -4,6 +4,7 @@ import {MainAction, MainState} from '../reducers/main/interface'
 import createPersistedState from 'use-persisted-state'
 import {useImmerReducer} from 'use-immer'
 import {MainContextValue} from './interfaces/main.context.interface'
+import Error from 'next/error'
 
 export interface MainContextProps {
   children: ReactNode
@@ -30,4 +31,14 @@ const MainContextProvider = ({children}: MainContextProps): JSX.Element => {
 
 export default MainContextProvider
 
-export const useMainContext: () => MainContextValue = () => useContext(MainContext) as MainContextValue
+export const useMainContext: () => MainContextValue = () => {
+  const mainContext = useContext(MainContext)
+  if (!mainContext) {
+    throw new Error({
+      title: 'Main context not found',
+      statusCode: 404,
+    })
+  }
+
+  return mainContext
+}

@@ -1,5 +1,5 @@
 import {FC, FunctionComponent} from 'react'
-import UserContextProvider from '../contexts/user.context'
+import UserContextProvider from '../../contexts/user.context'
 
 const WithUserContext: () => (ChildrenComponent: FC) => FunctionComponent = () => (ChildrenComponent: FC) => {
   const UserContext: FC = (props) => {

@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import MainLayout from '../components/layouts/MainLayout'
-import WithAuthUser from '../wrapper/WithAuthUser'
+import WithAuthUser from '../components/wrapper/WithAuthUser'
 
 export const Home = (): JSX.Element => (
     <MainLayout>

@@ -30,5 +30,5 @@ const ContainerContextProvider = ({children}: ContainerContextProps): JSX.Elemen
 export default ContainerContextProvider
 
 export const useContainer = <T extends unknown>(token: InjectionToken<T>): T => {
-  return useContext(ContainerContext).resolve(token) as T
+  return useContext(ContainerContext).resolve(token)
 }

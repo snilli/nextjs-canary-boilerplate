@@ -1,7 +1,7 @@
 import {FC, FunctionComponent, useEffect, useState} from 'react'
-import {useAuthContext} from '../contexts/auth.context'
+import {useAuthContext} from '../../contexts/auth.context'
 import {useRouter} from 'next/router'
-import Loading from '../components/Loading'
+import Loading from '../Loading'
 
 const WithAuthUser: () => (ChildrenComponent: FC) => FunctionComponent = () => (ChildrenComponent: FC) => {
   const Auth: FC = (props) => {

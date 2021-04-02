@@ -1,6 +1,7 @@
 import {createContext, ReactNode, useContext} from 'react'
 import {useContainer} from './container.context'
 import {UserRepo} from '../core/user/repos/user.repo'
+import Error from 'next/error'
 
 export interface UserContextProps {
   children: ReactNode
@@ -19,4 +20,14 @@ const UserContextProvider = ({children}: UserContextProps): JSX.Element => {
 
 export default UserContextProvider
 
-export const useUserContext = (): UserRepo => useContext(UserContext) as UserRepo
+export const useUserContext = (): UserRepo => {
+  const userContext = useContext(UserContext)
+  if (!userContext) {
+    throw new Error({
+      title: 'User context not found',
+      statusCode: 404,
+    })
+  }
+
+  return userContext
+}

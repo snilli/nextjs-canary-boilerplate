@@ -4,7 +4,7 @@ import Head from 'next/head'
 import AccountProfile from '../components/account/AccountProfile'
 import AccountProfileDetails from '../components/account/AccountProfileDetails'
 import DashboardLayout from '../components/layouts/DashboardLayout'
-import WithAuthUser from '../wrapper/WithAuthUser'
+import WithAuthUser from '../components/wrapper/WithAuthUser'
 import {useMainContext} from '../contexts/main.context'
 import {useAuthContext} from '../contexts/auth.context'
 

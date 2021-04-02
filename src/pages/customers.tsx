@@ -5,7 +5,7 @@ import CustomerListResults from '../components/customer/CustomerListResults'
 import customers from '../components/customer/customer-dto'
 import {FC} from 'react'
 import DashboardLayout from '../components/layouts/DashboardLayout'
-import WithAuthUser from '../wrapper/WithAuthUser'
+import WithAuthUser from '../components/wrapper/WithAuthUser'
 
 const CustomerListPage: FC = () => (
     <DashboardLayout>

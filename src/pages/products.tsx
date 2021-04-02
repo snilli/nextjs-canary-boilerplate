@@ -5,7 +5,7 @@ import ProductCard from '../components/product/ProductCard'
 import products from '../components/product/product-dto'
 import {FC} from 'react'
 import DashboardLayout from '../components/layouts/DashboardLayout'
-import WithAuthUser from '../wrapper/WithAuthUser'
+import WithAuthUser from '../components/wrapper/WithAuthUser'
 
 const Products: FC = () => (
     <DashboardLayout>
