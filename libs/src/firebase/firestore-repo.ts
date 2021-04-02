@@ -1,7 +1,8 @@
 import {injectable} from 'tsyringe'
-import {CollectionReference, DocumentReference, FirebaseApp} from './firebase'
+import {FirebaseApp} from './firebase'
 import {FirestoreRepoCreateFactory, FirestoreRepoOptions} from './interfaces/firestore-repo.interface'
 import {Entity} from '../ddd/entity'
+import {CollectionReference, DocumentReference} from './interfaces/firebase.interface'
 
 @injectable()
 export class FirestoreRepo<T extends Entity> {
@@ -48,7 +49,7 @@ export class FirestoreRepo<T extends Entity> {
   getCollectionRef(): CollectionReference<any> {
     return this
         .firebaseApp
-        .firestore()
+        .firestore
         .collection(this.collectionName) as CollectionReference<any>
   }
 
@@ -95,6 +96,10 @@ export class FirestoreRepo<T extends Entity> {
   }
 
   async disconnect(): Promise<void> {
-    await this.firebaseApp.firestore().disableNetwork()
+    await this.firebaseApp.firestore.disableNetwork()
+  }
+
+  async connect(): Promise<void> {
+    await this.firebaseApp.firestore.enableNetwork()
   }
 }

@@ -26,7 +26,7 @@ const WithAuthUser: () => (ChildrenComponent: FC) => FunctionComponent = () => (
     // }, [redirectToLogin])
 
     useEffect(() => {
-      const unSubscribe = auth.getAuth().onAuthStateChanged((currentUser) => {
+      const unSubscribe = auth.onAuthStateChanged((currentUser) => {
         if (!currentUser) {
           void router.replace('/login')
         } else {

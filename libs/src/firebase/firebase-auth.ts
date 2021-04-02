@@ -1,7 +1,7 @@
-import {Auth, FirebaseApp, User, UserCredential} from './firebase'
+import {FirebaseApp} from './firebase'
 import {UserInfo} from './interfaces/firebase-auth.interface'
 import {injectable} from 'tsyringe'
-import firebase from 'firebase/app'
+import {Unsubscribe, User, UserCredential} from './interfaces/firebase.interface'
 
 @injectable()
 export class FirebaseAuth {
@@ -32,7 +32,7 @@ export class FirebaseAuth {
     await this.setPersistence()
     const userCredential = await this
         .firebase
-        .auth()
+        .appAuth
         .signInWithEmailAndPassword(email, password)
 
     const user = FirebaseAuth.getUserInfo(userCredential)
@@ -47,8 +47,8 @@ export class FirebaseAuth {
     await this.setPersistence()
     const userCredential = await this
         .firebase
-        .auth()
-        .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+        .appAuth
+        .signInWithPopup(new this.firebase.auth.GoogleAuthProvider())
 
     const user = FirebaseAuth.getUserInfo(userCredential)
     if (!user) {
@@ -59,11 +59,11 @@ export class FirebaseAuth {
   }
 
   async signOut(): Promise<void> {
-    await this.firebase.auth().signOut()
+    await this.firebase.appAuth.signOut()
   }
 
   async getToken(): Promise<string | undefined> {
-    const currentUser = this.firebase.auth().currentUser
+    const currentUser = this.firebase.appAuth.currentUser
     if (!currentUser) {
       return undefined
     }
@@ -72,7 +72,7 @@ export class FirebaseAuth {
   }
 
   getUser(): User | undefined {
-    const currentUser = this.firebase.auth().currentUser
+    const currentUser = this.firebase.appAuth.currentUser
     if (!currentUser) {
       return undefined
     }
@@ -80,11 +80,11 @@ export class FirebaseAuth {
     return currentUser
   }
 
-  getAuth(): Auth {
-    return this.firebase.auth()
+  onAuthStateChanged(callback: (use: User | null) => void): Unsubscribe {
+    return this.firebase.appAuth.onAuthStateChanged(callback)
   }
 
   private async setPersistence(): Promise<void> {
-    await this.firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    await this.firebase.auth().setPersistence(this.firebase.auth.Auth.Persistence.LOCAL)
   }
 }
