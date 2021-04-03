@@ -3,11 +3,13 @@
 //   toId(): string
 // }
 
-import {Model} from '../../ddd/model'
+import {Entity} from '../../ddd/entity'
+import {FirebaseApp} from '../firebase'
 
-export type FirestoreRepoCreateFactory<T extends Model> = (payload: any) => T
+export type FirestoreRepoCreateFactory<T extends Entity> = (payload: any) => T
 
-export interface FirestoreRepoOptions<T extends Model> {
+export interface FirestoreRepoOptions<T extends Entity> {
   collectionName: string
   createFactory: FirestoreRepoCreateFactory<T>
+  firebaseApp: FirebaseApp
 }

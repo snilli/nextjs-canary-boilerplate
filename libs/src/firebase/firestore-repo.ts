@@ -1,28 +1,26 @@
-import 'reflect-metadata'
 import {injectable} from 'tsyringe'
 import {FirebaseApp} from './firebase'
 import {FirestoreRepoCreateFactory, FirestoreRepoOptions} from './interfaces/firestore-repo.interface'
-import firebase from 'firebase'
-import {Model} from '../ddd/model'
+import {Entity} from '../ddd/entity'
+import {CollectionReference, DocumentReference} from './interfaces/firebase.interface'
 
 @injectable()
-export class FirestoreRepo<T extends Model> {
+export class FirestoreRepo<T extends Entity> {
   protected createFactory: FirestoreRepoCreateFactory<T>
   protected collectionName: string
+  protected firebaseApp: FirebaseApp
 
-  constructor(
-      option: FirestoreRepoOptions<T>,
-      private firebase: FirebaseApp,
-  ) {
+  constructor(option: FirestoreRepoOptions<T>) {
     this.createFactory = option.createFactory
     this.collectionName = option.collectionName
+    this.firebaseApp = option.firebaseApp
   }
 
   async setDoc(document: T): Promise<void> {
     const id = document.getId()
     const collection = await this.getCollectionRef()
 
-    const data = document.toJSON() as unknown as T
+    const data = document.getState() as unknown as T
 
     await collection.doc(id).set(data)
   }
@@ -48,14 +46,14 @@ export class FirestoreRepo<T extends Model> {
     await docRef.delete()
   }
 
-  getCollectionRef(): firebase.firestore.CollectionReference<any> {
+  getCollectionRef(): CollectionReference<any> {
     return this
-        .firebase
-        .firestore()
-        .collection(this.collectionName) as firebase.firestore.CollectionReference<any>
+        .firebaseApp
+        .firestore
+        .collection(this.collectionName) as CollectionReference<any>
   }
 
-  async getDocRef(id: string): Promise<firebase.firestore.DocumentReference<T> | undefined> {
+  async getDocRef(id: string): Promise<DocumentReference<T> | undefined> {
     const collection = await this.getCollectionRef()
     const doc = collection.doc(id)
     if (!doc) {
@@ -98,6 +96,10 @@ export class FirestoreRepo<T extends Model> {
   }
 
   async disconnect(): Promise<void> {
-    await this.firebase.firestore().disableNetwork()
+    await this.firebaseApp.firestore.disableNetwork()
+  }
+
+  async connect(): Promise<void> {
+    await this.firebaseApp.firestore.enableNetwork()
   }
 }

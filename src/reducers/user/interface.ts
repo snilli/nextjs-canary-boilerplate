@@ -20,18 +20,5 @@ export interface UserState {
   phoneNumber?: string
   photoURL?: string
   providerId: string
-  uid: string
-  token: UserToken
-}
-
-export interface UserToken {
-  token: string
-  expirationTime: string
-  authTime: string
-  issuedAtTime: string
-  signInProvider?: string
-  signInSecondFactor?: string
-  claims: {
-    [key: string]: any
-  }
+  id: string
 }
