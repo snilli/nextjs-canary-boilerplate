@@ -1,5 +1,5 @@
-import {HttpsClientException} from './error'
-import HttpAgent, {HttpsAgent} from 'agentkeepalive'
+import { HttpsClientException } from './error'
+import HttpAgent, { HttpsAgent } from 'agentkeepalive'
 import phin from 'phin'
 import http from 'http'
 
@@ -104,17 +104,21 @@ export class HttpClient {
         return res
     }
 
-    private async send(url: string, body: string, req: HttpsRequestPayload): Promise<HttpsResponse> {
+    private async send(
+        url: string,
+        body: string,
+        req: HttpsRequestPayload
+    ): Promise<HttpsResponse> {
         for (let i = 0; i < this.maxRetry; i++) {
             try {
-                const res = await phin({
+                const res = ((await phin({
                     url: url,
                     headers: req.headers,
                     core: this.core,
                     timeout: req.timeout ?? this.timeout,
                     method: req.method,
                     data: body,
-                }) as unknown as HttpsResponse
+                })) as unknown) as HttpsResponse
 
                 res.req = {
                     name: req.name,
@@ -133,7 +137,12 @@ export class HttpClient {
 
                 return res
             } catch (e: any) {
-                if (e.code === 'ETIMEDOUT' || e.code === 'ECONNRESET' || e.code === 'EPIPE' || e.message === 'Timeout reached') {
+                if (
+                    e.code === 'ETIMEDOUT' ||
+                    e.code === 'ECONNRESET' ||
+                    e.code === 'EPIPE' ||
+                    e.message === 'Timeout reached'
+                ) {
                     await this.sleep(this.delayRetry)
                 } else {
                     throw new HttpsClientException(e.message, req)
@@ -145,6 +154,6 @@ export class HttpClient {
     }
 
     private sleep(ms: number) {
-        return new Promise(resolve => setTimeout(resolve, ms))
+        return new Promise((resolve) => setTimeout(resolve, ms))
     }
 }
