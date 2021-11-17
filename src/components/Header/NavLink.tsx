@@ -10,14 +10,15 @@ export default function NavLink(props: NavLinkProps): JSX.Element {
     return (
         <NextLink {...props}>
             <Link
-                variant='button'
-                color='inherit'
+                variant='h6'
+                color='primary'
                 sx={{
                     my: 1,
                     mx: 1.5,
                     cursor: 'pointer',
+                    fontWeight: 600,
                     '&:hover': {
-                        color: 'text.secondary'
+                        color: (theme) => theme.palette.secondary.main,
                     }
                 }}
             >

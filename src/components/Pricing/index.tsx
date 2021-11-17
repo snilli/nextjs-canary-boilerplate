@@ -1,8 +1,15 @@
 import { FC } from "react";
+import dynamic from "next/dynamic";
+
+const Hero = dynamic(import('./Hero'));
+const Tier = dynamic(import('./Tier'));
 
 const Pricing: FC = () => {
     return (
-        <div>Pricing</div>
+        <>
+            <Hero />
+            <Tier />
+        </>
     )
 }
 

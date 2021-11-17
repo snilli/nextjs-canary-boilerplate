@@ -1,15 +1,13 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-import Typography from '@mui/material/Typography';
 
 const Layout = dynamic(import('../components/Layout'));
+const Pricing = dynamic(import('../components/Pricing'));
 
 export default function PricingPage(): JSX.Element {
     return (
         <Layout>
-            <Typography variant="h5" component="h1">
-                PricingPage
-            </Typography>
+            <Pricing />
         </Layout>
     );
 }

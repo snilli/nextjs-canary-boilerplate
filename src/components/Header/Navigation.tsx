@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-const NavLink = dynamic(import('./Link'));
+const NavLink = dynamic(import('./NavLink'));
 
 interface NavigationItem {
     id: string;
@@ -9,11 +9,6 @@ interface NavigationItem {
 }
 
 const navList: NavigationItem[] = [
-    {
-        id: 'home',
-        label: 'Home',
-        href: '/'
-    },
     {
         id: 'pricing',
         label: 'Pricing',
