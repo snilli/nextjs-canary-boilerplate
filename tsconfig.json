@@ -25,7 +25,8 @@
     "jsx": "preserve",
     "noUnusedLocals": true,
     "preserveConstEnums": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "incremental": true
   },
   "exclude": [
     "node_modules",

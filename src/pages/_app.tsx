@@ -1,42 +1,32 @@
-import 'reflect-metadata'
-import {AppProps} from 'next/app'
-import MainContextProvider from '../contexts/main.context'
-import GlobalStyles from '../contexts/global-styles.context'
-import {ThemeProvider} from '@material-ui/styles'
-import theme from '../theme'
-import {useEffect} from 'react'
-import Head from 'next/head'
-import ContainerContextProvider from '../contexts/container.context'
-import AuthContextProvider from '../contexts/auth.context'
+import React from 'react';
+import Head from 'next/head';
+import { AppProps } from 'next/app';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { CacheProvider, EmotionCache } from '@emotion/react';
+import theme from '../theme';
+import createEmotionCache from '../utils/createEmotionCache';
 
-const MyApp = ({Component, pageProps}: AppProps) => {
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
 
-  useEffect(() => {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side')
-    if (jssStyles) {
-      jssStyles.parentElement?.removeChild(jssStyles)
-    }
-  }, [])
-
-  return (
-      <>
-        <Head>
-          <title>My page</title>
-          <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width' />
-        </Head>
-        <ContainerContextProvider>
-          <AuthContextProvider>
-            <ThemeProvider theme={theme}>
-              <MainContextProvider>
-                <GlobalStyles />
-                <Component {...pageProps} />
-              </MainContextProvider>
-            </ThemeProvider>
-          </AuthContextProvider>
-        </ContainerContextProvider>
-      </>
-  )
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
 }
 
-export default MyApp
+export default function MyApp(props: MyAppProps) {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+
+  return (
+    <CacheProvider value={emotionCache}>
+      <Head>
+        <title>NextJS TypeScript Material</title>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+      </Head>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </CacheProvider>
+  );
+}

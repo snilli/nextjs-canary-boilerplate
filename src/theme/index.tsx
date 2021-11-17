@@ -1,25 +1,39 @@
-import {colors, createMuiTheme} from '@material-ui/core'
-import shadows from './shadows'
-import typography from './typography'
-import {Shadows} from '@material-ui/core/styles/shadows'
+import { createTheme } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
-    background: {
-      default: '#F4F6F8',
-      paper: colors.common.white,
-    },
     primary: {
-      contrastText: '#ffffff',
-      main: '#5664d2',
+      main: '#1d4796',
     },
-    text: {
-      primary: '#172b4d',
-      secondary: '#6b778c',
+    secondary: {
+      main: '#2b6eeb',
     },
+    error: {
+      main: red.A400,
+    },
+    divider: 'rgb(221, 221, 221)',
   },
-  shadows: shadows as Shadows,
-  typography,
-})
+  components: {
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          textDecoration: 'none',
+          textTransform: 'inherit',
+          fontSize: '.875rem',
+        }
+      }
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'inherit',
+          borderRadius: '.25rem',
+          fontWeight: 600,
+        }
+      }
+    }
+  }
+});
 
-export default theme
+export default theme;
