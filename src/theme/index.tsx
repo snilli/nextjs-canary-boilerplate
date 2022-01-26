@@ -1,25 +1,85 @@
-import {colors, createMuiTheme} from '@material-ui/core'
-import shadows from './shadows'
-import typography from './typography'
-import {Shadows} from '@material-ui/core/styles/shadows'
+import { createTheme } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
+import GlobalStyles from '@mui/material/GlobalStyles';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
-    background: {
-      default: '#F4F6F8',
-      paper: colors.common.white,
-    },
     primary: {
-      contrastText: '#ffffff',
-      main: '#5664d2',
+      main: '#4688F4',
     },
-    text: {
-      primary: '#172b4d',
-      secondary: '#6b778c',
+    secondary: {
+      main: '#2b6eeb',
     },
+    error: {
+      main: red.A400,
+    },
+    divider: 'rgb(221, 221, 221)',
   },
-  shadows: shadows as Shadows,
-  typography,
-})
+  components: {
+    MuiTypography: {
+      styleOverrides: {
+        h2: {
+          fontWeight: 600,
+          fontSize: '2.375rem',
+        },
+        h3: {
+          fontWeight: 400,
+          fontSize: '2.125rem',
+        },
+        h5: {
+          fontWeight: 400,
+          lineHeight: '2.5rem',
+          fontSize: '1.5rem',
+        },
+        subtitle1: {
+          fontWeight: 500,
+          fontSize: '1rem',
+          lineHeight: '1.5rem',
+        }
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: '.75rem',
+        }
+      }
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          textDecoration: 'none',
+          textTransform: 'inherit',
+          fontSize: '.875rem',
+        }
+      }
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'inherit',
+          borderRadius: '.25rem',
+          fontWeight: 600,
+        }
+      }
+    }
+  }
+});
 
-export default theme
+export const globalStyles = (
+  <GlobalStyles
+    styles={{
+      ul: {
+        margin: 0,
+        padding: 0,
+        listStyle: 'none',
+      },
+      a: {
+        textDecoration: 'none',
+        color: 'inherit',
+      }
+    }}
+  />
+)
+
+export default theme;
