@@ -26,7 +26,13 @@
     "noUnusedLocals": true,
     "preserveConstEnums": true,
     "sourceMap": true,
-    "incremental": true
+    "incremental": true,
+    "baseUrl": "/src",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/pages/*": ["pages/*"],
+      "@/styles/*": ["styles/*"]
+    }
   },
   "exclude": [
     "node_modules",
