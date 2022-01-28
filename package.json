@@ -39,6 +39,7 @@
     "@material-ui/icons": "^5.0.0-alpha.28",
     "chart.js": "^3.7.0",
     "clsx": "^1.1.1",
+    "daisyui": "^1.25.4",
     "firebase": "^9.6.4",
     "firebase-admin": "^10.0.2",
     "immer": "^9.0.12",
