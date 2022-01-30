@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import Typography from '@mui/material/Typography';
 
-const Logo: FC = (): JSX.Element => {
+const Logo: FC = () => {
     return (
         <Typography
             variant='h6'

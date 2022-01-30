@@ -6,7 +6,7 @@ interface NavLinkProps extends LinkProps {
     children: React.ReactNode;
 }
 
-export default function NavLink(props: NavLinkProps): JSX.Element {
+export default React.memo(function NavLink(props: NavLinkProps): JSX.Element {
     return (
         <NextLink {...props}>
             <Link
@@ -26,4 +26,4 @@ export default function NavLink(props: NavLinkProps): JSX.Element {
             </Link>
         </NextLink>
     )
-}
+})

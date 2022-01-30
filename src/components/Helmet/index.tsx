@@ -1,15 +1,15 @@
-import React from 'react';
-import Head from 'next/head';
+import { FC, Fragment, ReactChild } from 'react'
+import Head from 'next/head'
 
 interface HelmetProps {
-    title: string;
+    title: string
+    children: ReactChild
 }
 
-export default function Helmet(props: HelmetProps): JSX.Element {
-    const { title } = props;
+export const Helmet: FC<HelmetProps> = (props: HelmetProps) => {
     return (
         <Head>
-            <title>{title}</title>
+            <title>{props.title}</title>
         </Head>
     )
 }
