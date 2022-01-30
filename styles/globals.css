@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    * {
+        @apply font-poppins m-0 p-0 box-border scroll-smooth;
+    }
+
+    section {
+        @apply p-24
+    }
+}
+
+@layer components {
+    .header {
+        @apply relative inset-0 w-full py-10 px-24 z-10 flex justify-between items-center transition duration-500;
+    }
+}
+
+
