@@ -6,5 +6,15 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('daisyui'),
+  ],
+  daisyui: {
+    themes: [
+      'emerald', // first one will be the default theme
+      'dark',
+      'forest',
+      'synthwave'
+    ],
+  },
 }
