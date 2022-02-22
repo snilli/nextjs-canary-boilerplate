@@ -8,14 +8,6 @@
     }
 
     section {
-        @apply p-24
+        @apply p-[100px]
     }
 }
-
-@layer components {
-    .header {
-        @apply relative inset-0 w-full py-10 px-24 z-10 flex justify-between items-center transition duration-500;
-    }
-}
-
-
